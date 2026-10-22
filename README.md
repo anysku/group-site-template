@@ -4,6 +4,8 @@ A starter website for a group whose member organizations run sales on [anySKU](h
 
 anySKU handles the selling: accounts, listings, payments, pickup and sales reports. This site doesn't repeat any of that. It tells people who you are and sends them to the right place on anySKU.
 
+See it running with sample sales: https://groups-demo.anysku.com
+
 ## What's included
 
 | Page | What it shows | Where it comes from |
@@ -41,6 +43,8 @@ npm run dev
 ```
 
 Then open http://localhost:4321. Changes show as you save.
+
+To try it with the sample sales used by the demo, run `SAMPLE_DATA=1 npm run dev` (in PowerShell: `$env:SAMPLE_DATA=1; npm run dev`).
 
 ## Working with an AI assistant
 

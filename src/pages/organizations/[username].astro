@@ -2,7 +2,7 @@
 import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import EventCard from "../../components/EventCard.astro";
-import { anysku } from "../../../site.config";
+import { anysku } from "../../lib/site";
 import { loadOrganizations, type Organization } from "../../lib/organizations";
 
 export async function getStaticPaths() {

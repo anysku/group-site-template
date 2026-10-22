@@ -36,6 +36,9 @@ h1, h2, h3 { line-height: 1.2; }
 .section { padding: 2.5rem 1rem; }
 .lead { font-size: 1.2rem; color: var(--color-muted); }
 
+.sample-banner { margin: 0; padding: 0.5rem 1rem; text-align: center; background: var(--color-accent); color: var(--color-accent-text); font-size: 0.9rem; }
+.sample-banner a { color: inherit; font-weight: 600; }
+
 .skip { position: absolute; left: -999px; }
 .skip:focus { left: 1rem; top: 1rem; background: var(--color-bg); padding: 0.5rem; }
 

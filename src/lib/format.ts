@@ -1,4 +1,4 @@
-import { site } from "../../site.config";
+import { site } from "./site";
 import type { GroupEvent } from "./anysku";
 
 // anySKU sends event times in UTC without a zone marker.

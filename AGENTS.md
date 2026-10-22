@@ -65,6 +65,7 @@ A members' area needs a server: an Astro server endpoint with an adapter for the
 
 - Astro 7, static output. `npm run dev` to work locally, `npm run build` to build into `dist/`.
 - `site.config.ts`: the group's settings. `GROUP_SLUG` and `ANYSKU_API_URL` environment variables override them for local testing.
+- `SAMPLE_DATA=1` builds with the sample responses in `src/sample/data.ts` (same shapes as the API) and shows a banner. The public demo uses it; `.github/workflows/demo.yml` only runs in `anysku/group-site-template`.
 - `src/lib/anysku.ts`: the API calls and response types. Add new endpoints here.
 - `src/pages/`: one file per page. Markdown pages use `layouts/Page.astro`.
 - `src/content/organizations/{username}.md`: optional extra text and photo for an organization.

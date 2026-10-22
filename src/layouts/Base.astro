@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { site } from "../../site.config";
+import { sampleMode, site } from "../lib/site";
 
 interface Props {
   title?: string;
@@ -36,6 +36,11 @@ const path = Astro.url.pathname;
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
+    {sampleMode && (
+      <p class="sample-banner">
+        An example site with sample sales. <a href="https://github.com/anysku/group-site-template">Make your own</a>.
+      </p>
+    )}
     <header class="site-header">
       <div class="wrap header-row">
         <a class="brand" href="/">{site.name}</a>
