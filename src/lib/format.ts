@@ -36,6 +36,10 @@ export function eventPlace(event: GroupEvent): string {
   return [event.City, event.State].filter(Boolean).join(", ");
 }
 
+export function capitalize(text: string): string {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 export function money(amount: number): string {
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(amount);
 }

@@ -1,6 +1,7 @@
 ---
 import type { GroupEvent } from "../lib/anysku";
 import { eventPlace, eventWhen } from "../lib/format";
+import { site } from "../lib/site";
 
 interface Props {
   event: GroupEvent;
@@ -22,7 +23,7 @@ const place = eventPlace(event);
     )}
     {event.Status !== "ended" && (
       <p class="event-counts">
-        {event.ItemsForSale} {event.ItemsForSale === 1 ? "item" : "items"} from {event.Sellers} {event.Sellers === 1 ? "seller" : "sellers"}
+        {event.ItemsForSale} {event.ItemsForSale === 1 ? "item" : "items"} from {event.Sellers} {event.Sellers === 1 ? site.sellerLabel.one : site.sellerLabel.many}
       </p>
     )}
     {event.Status !== "ended" && (

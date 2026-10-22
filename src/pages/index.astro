@@ -4,16 +4,17 @@ import EventCard from "../components/EventCard.astro";
 import Steps from "../components/Steps.astro";
 import { anysku, site } from "../lib/site";
 import { getEvents, getGroup, getStats } from "../lib/anysku";
-import { money } from "../lib/format";
+import { capitalize, money } from "../lib/format";
 
 const [group, events, stats] = await Promise.all([getGroup(), getEvents("current"), getStats()]);
 const next = events.slice(0, 3);
 const org = site.organizationLabel;
+const seller = site.sellerLabel;
 
 const steps = [
   {
     title: "See how it works",
-    text: `Your ${org.one} holds a sale. Members sell their own things, neighbours order ahead, and everyone meets on the day.`,
+    text: `Your ${org.one} holds a sale. ${capitalize(seller.many)} list what they have to sell, neighbours order ahead, and everyone meets on the day.`,
     link: { href: "/about/", label: "About us" },
   },
   {
@@ -70,7 +71,7 @@ const steps = [
       <h2>So far</h2>
       <dl>
         <div><dt>Sales held</dt><dd>{stats.EventsCounted}</dd></div>
-        <div><dt>Sellers</dt><dd>{stats.Sellers}</dd></div>
+        <div><dt>{capitalize(seller.many)}</dt><dd>{stats.Sellers}</dd></div>
         <div><dt>Sold</dt><dd>{money(stats.Sales)}</dd></div>
         {stats.OrganizationsShare !== null && (
           <div><dt>Earned by our {org.many}</dt><dd>{money(stats.OrganizationsShare)}</dd></div>

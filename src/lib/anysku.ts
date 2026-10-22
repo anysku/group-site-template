@@ -71,20 +71,24 @@ async function get<T>(path: string, { allowMissing = false } = {}): Promise<T | 
 
 const groupPath = `/api/v1/collectives/${encodeURIComponent(groupSlug)}`;
 
-export async function getGroup(): Promise<Group> {
-  const group = await get<Group>(groupPath, { allowMissing: true });
-  if (!group) {
+async function getForGroup<T>(path: string): Promise<T> {
+  const result = await get<T>(`${groupPath}${path}`, { allowMissing: true });
+  if (result === null) {
     throw new Error(`No group "${groupSlug}" on anySKU. Set groupSlug in site.config.ts.`);
   }
-  return group;
+  return result;
 }
 
-export async function getEvents(status: "current" | "live" | "upcoming" | "ended"): Promise<GroupEvent[]> {
-  return (await get<GroupEvent[]>(`${groupPath}/events?status=${status}`)) ?? [];
+export function getGroup(): Promise<Group> {
+  return getForGroup<Group>("");
 }
 
-export async function getStats(): Promise<GroupStats> {
-  return (await get<GroupStats>(`${groupPath}/stats`))!;
+export function getEvents(status: "current" | "live" | "upcoming" | "ended"): Promise<GroupEvent[]> {
+  return getForGroup<GroupEvent[]>(`/events?status=${status}`);
+}
+
+export function getStats(): Promise<GroupStats> {
+  return getForGroup<GroupStats>("/stats");
 }
 
 export async function getSeller(username: string): Promise<Seller | null> {

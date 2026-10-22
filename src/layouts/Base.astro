@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { sampleMode, site } from "../lib/site";
+import { capitalize } from "../lib/format";
 
 interface Props {
   title?: string;
@@ -13,7 +14,7 @@ const pageTitle = title ? `${title} | ${site.name}` : site.name;
 const nav = [
   { href: "/", label: "Home" },
   { href: "/events/", label: "Sales" },
-  { href: "/organizations/", label: site.organizationLabel.many[0].toUpperCase() + site.organizationLabel.many.slice(1) },
+  { href: "/organizations/", label: capitalize(site.organizationLabel.many) },
   { href: "/about/", label: "About" },
   { href: "/faq/", label: "Questions" },
   { href: "/contact/", label: "Contact" },
@@ -67,7 +68,7 @@ const path = Astro.url.pathname;
           <li><a href="/branding/">Branding</a></li>
           <li><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></li>
           {social.map(([name, url]) => (
-            <li><a href={url} rel="me">{name[0].toUpperCase() + name.slice(1)}</a></li>
+            <li><a href={url} rel="me">{capitalize(name)}</a></li>
           ))}
         </ul>
       </div>

@@ -67,7 +67,8 @@ A members' area needs a server: an Astro server endpoint with an adapter for the
 - `site.config.ts`: the group's settings. `GROUP_SLUG` and `ANYSKU_API_URL` environment variables override them for local testing.
 - `SAMPLE_DATA=1` builds with the sample responses in `src/sample/data.ts` (same shapes as the API) and shows a banner. The public demo uses it; `.github/workflows/demo.yml` only runs in `anysku/group-site-template`.
 - `src/lib/anysku.ts`: the API calls and response types. Add new endpoints here.
-- `src/pages/`: one file per page. Markdown pages use `layouts/Page.astro`.
+- `src/pages/`: one file per page. Markdown pages use `layouts/Page.astro`. The example text in `about.md` and `faq.md` describes a community sale (people selling their own things, the organization receiving a share); rewrite it for the group's kind of sale.
+- Use `site.organizationLabel` and `site.sellerLabel` in page text instead of hard-coding "church", "school", "member" or "vendor".
 - `src/content/organizations/{username}.md`: optional extra text and photo for an organization.
 - `src/styles/global.css`: colours and layout. Change the variables at the top for the group's colours.
 - If anySKU can't be reached the build fails, and the host keeps serving the last good version. Don't swallow those errors.

@@ -2,10 +2,11 @@
 import Base from "../../layouts/Base.astro";
 import { site } from "../../lib/site";
 import { loadOrganizations } from "../../lib/organizations";
+import { capitalize } from "../../lib/format";
 
 const organizations = await loadOrganizations();
 const label = site.organizationLabel.many;
-const title = label[0].toUpperCase() + label.slice(1);
+const title = capitalize(label);
 ---
 <Base title={title} description={`The ${label} running sales with ${site.name}.`}>
   <div class="wrap section">

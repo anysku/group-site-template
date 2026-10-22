@@ -19,8 +19,8 @@ See it running with sample sales: https://groups-demo.anysku.com
 ## Set it up
 
 1. Create your copy: use the **Use this template** button on GitHub.
-2. Open `site.config.ts` and set your group's name, your `groupSlug` (the end of your group's address, `anysku.com/g/your-slug`), your time zone and your contact email.
-3. Edit the pages in `src/pages`: `about.md`, `faq.md` and `branding.md` are plain text with a few symbols for headings and links.
+2. Open `site.config.ts` and set your group's name, your `groupSlug` (the end of your group's address, `anysku.com/g/your-slug`), what you call your organizations and sellers (for example "school" and "family", or "market" and "vendor"), your time zone and your contact email.
+3. Rewrite the pages in `src/pages` for your group: `about.md`, `faq.md` and `branding.md` are plain text with a few symbols for headings and links. Their example text assumes a community sale where people sell their own things; change it to describe how your sales work.
 4. Optionally, add a page for an organization in `src/content/organizations/`, named after its anySKU username. See `example-organization.md`.
 
 ## Put it online

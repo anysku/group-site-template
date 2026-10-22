@@ -8,8 +8,10 @@ export const site = {
   // Your group's address on anySKU: anysku.com/g/{groupSlug}
   groupSlug: "your-group",
 
-  // What you call the organizations in your group, singular and plural.
+  // What you call the organizations in your group, and the people who sell at their sales.
+  // A school network might use "school" and "family", a market association "market" and "vendor".
   organizationLabel: { one: "organization", many: "organizations" },
+  sellerLabel: { one: "member", many: "members" },
 
   // Event times are shown in this time zone.
   timeZone: "America/New_York",
