@@ -4,6 +4,9 @@ import type { Group, GroupEvent, GroupStats, Seller } from "../lib/anysku";
 
 const day = 24 * 60 * 60 * 1000;
 
+// A real demo sale on anySKU, hosted by a sample account: its items show but can't be bought.
+const demoSale = "https://www.anysku.com/@hopechurchdemo/event/fall-rummage-sale-demo";
+
 function utc(daysFromNow: number, hourUtc: number): string {
   const d = new Date(Date.now() + daysFromNow * day);
   d.setUTCHours(hourUtc, 0, 0, 0);
@@ -21,9 +24,9 @@ function event(id: string, name: string, host: string, city: string, daysFromNow
     StartsOn: utc(daysFromNow, 13),
     EndsOn: utc(daysFromNow, 19),
     Status: status,
-    Url: "https://www.anysku.com",
-    FlyerUrl: "https://www.anysku.com",
-    QrUrl: "https://www.anysku.com",
+    Url: demoSale,
+    FlyerUrl: `${demoSale}/print`,
+    QrUrl: `${demoSale}/print`,
     BannerUrl: null,
     Sellers: sellers,
     ItemsForSale: items,
@@ -72,7 +75,7 @@ const sellers: Record<string, Seller> = {
     AvatarUrl: null,
     BannerUrl: null,
     Location: "Marietta, GA",
-    Url: "https://www.anysku.com",
+    Url: "https://www.anysku.com/@hopechurchdemo",
   },
   gracefellowshipdemo: {
     Username: "gracefellowshipdemo",
