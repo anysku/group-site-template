@@ -8,7 +8,7 @@ Read this before changing anything. It applies in any language or framework: if 
 
 They exist on anySKU. Link to them instead.
 
-- Sign-up or login for buying and selling: link to `https://www.anysku.com/auth`.
+- Sign-up or login for buying and selling. People create their anySKU account as part of joining a sale (from the organization's invite link) or at checkout, so the site doesn't need a separate sign-up button. Seller invite links are credentials: never publish them on the public site.
 - Listings, carts, checkout or payment forms.
 - Seller tools: creating sales, inviting sellers, handing over orders.
 - A sales dashboard for the group: group administrators use `https://www.anysku.com/g/{groupSlug}/manage`. Build custom reports only from the partner API below.

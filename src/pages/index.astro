@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import EventCard from "../components/EventCard.astro";
 import Steps from "../components/Steps.astro";
-import { anysku, site } from "../lib/site";
+import { site } from "../lib/site";
 import { getEvents, getGroup, getStats } from "../lib/anysku";
 import { capitalize, money } from "../lib/format";
 
@@ -18,14 +18,13 @@ const steps = [
     link: { href: "/about/", label: "About us" },
   },
   {
-    title: "Create your free anySKU account",
-    text: "One account to sell, buy and get paid. It takes a minute with your email or phone number.",
-    link: { href: `${anysku.siteUrl}/auth`, label: "Sign up on anySKU" },
+    title: `Join from your ${org.one}'s invite`,
+    text: `Open the invite link or poster QR code your ${org.one} shares. You create your free anySKU account as you join, with just your email or phone number.`,
   },
   {
-    title: `Join your ${org.one}'s sale`,
-    text: `Open the invite link your ${org.one} sends you, choose what to sell, and bring it on the day.`,
-    link: { href: "/events/", label: "Find a sale" },
+    title: "Choose what to sell",
+    text: "Pick the items for the sale, and bring the ones that sell on the day. You're paid for what you sell.",
+    link: { href: "/events/", label: "See upcoming sales" },
   },
 ];
 ---
@@ -36,8 +35,8 @@ const steps = [
       <h1>{site.name}</h1>
       <p class="lead">{site.tagline}</p>
       <p class="hero-actions">
-        <a class="button" href={`${anysku.siteUrl}/auth`}>Get started</a>
-        <a class="button button-quiet" href="/events/">Find a sale</a>
+        <a class="button" href="/events/">Find a sale</a>
+        <a class="button button-quiet" href="/about/">How it works</a>
       </p>
     </div>
   </section>

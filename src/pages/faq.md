@@ -4,9 +4,13 @@ title: Questions
 description: Answers to common questions about our sales.
 ---
 
+## How do I start selling?
+
+Open the invite link or QR code your organization shares. It shows the sale and its terms, and you create your free anySKU account as part of joining.
+
 ## Do I need an account to buy?
 
-You need a free anySKU account to order ahead. You can browse every sale without one.
+You can browse every sale without one. When you order, you create a free account at checkout with your email or phone number.
 
 ## Do I need bank details to sell?
 
