@@ -1,0 +1,28 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { demoOnly } from "../../../lib/demo";
+import { site } from "../../../lib/site";
+
+export const getStaticPaths = demoOnly;
+---
+<Base title="Members' area" description="Sign in with anySKU to see your own activity at our sales.">
+  <div class="wrap section signin">
+    <h1>Members' area</h1>
+    <p class="lead">See your sales at {site.name} sales, and what your {site.organizationLabel.one} has shared with you.</p>
+
+    <div class="signin-box">
+      <a class="button" href="/demo/members/account/">Sign in with anySKU</a>
+      <p>You choose what this site may see, and you can disconnect it any time from your anySKU account.</p>
+    </div>
+
+    <section class="month prose">
+      <h2>What happens on a real site</h2>
+      <ol>
+        <li>The button sends the member to anySKU to sign in, with their email or phone number as usual.</li>
+        <li>anySKU shows what this site is asking to see (their own sales at your group's sales) and they choose to connect.</li>
+        <li>They come back here signed in. Your site never sees their anySKU password, and it can pass in your own ID for them so their activity lines up with your records.</li>
+      </ol>
+      <p>In this demo the button goes straight to a sample member, Sam (demo).</p>
+    </section>
+  </div>
+</Base>

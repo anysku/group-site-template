@@ -1,0 +1,13 @@
+---
+// Shows the web team which anySKU request a block of the demo comes from.
+interface Props {
+  request: string;
+  needs?: string;
+}
+
+const { request, needs } = Astro.props;
+---
+<p class="source">
+  <span>Sample data. On your site: <code>{request}</code></span>
+  {needs && <span>Needs {needs}.</span>}
+</p>

@@ -1,0 +1,101 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Source from "../../../components/Source.astro";
+import { demoOnly } from "../../../lib/demo";
+import { site } from "../../../lib/site";
+import { capitalize, money, shortDate } from "../../../lib/format";
+import { churchRecords, reportEvent, reportSales, reportSellers, reportSummary } from "../../../sample/partner";
+
+export const getStaticPaths = demoOnly;
+
+const org = site.organizationLabel;
+
+const statusLabel: Record<string, string> = {
+  to_collect: "To collect",
+  awaiting_buyer: "Waiting for buyer",
+  collected: "Collected",
+  refunded: "Refunded",
+  cancelled: "Cancelled",
+};
+
+const shareLabel: Record<string, string> = {
+  none: "",
+  pending: "On its way",
+  earned: "Earned",
+  paid: "Paid",
+  void: "None",
+};
+---
+<Base title="Reports" description={`Sales reports for our ${org.many}.`}>
+  <div class="wrap section">
+    <h1>Reports</h1>
+    <p class="lead">
+      {reportEvent.Name}, Hope Church (demo), {shortDate(reportEvent.StartsOn)}. A report like this can
+      live on your own site for your leaders, behind your own login.
+    </p>
+
+    <dl class="totals-inline">
+      <div><dt>Sold</dt><dd>{money(reportSummary.CollectedSales, true)}</dd></div>
+      <div><dt>Orders</dt><dd>{reportSummary.Orders}</dd></div>
+      <div><dt>{capitalize(site.sellerLabel.many)} selling</dt><dd>{reportSummary.SellersActive}</dd></div>
+      <div><dt>{capitalize(org.one)}'s share, paid</dt><dd>{money(reportSummary.SharePaid, true)}</dd></div>
+    </dl>
+    <Source request="GET /api/partner/v1/events/{id}" needs="a partner key" />
+
+    <section class="month">
+      <h2>{capitalize(site.sellerLabel.many)}</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>anySKU</th><th>In your records</th><th>Spot</th><th>Items</th><th>Orders</th><th>Sold</th><th>Share</th></tr>
+          </thead>
+          <tbody>
+            {reportSellers.map((s) => (
+              <tr>
+                <td>@{s.Username}{s.IsHost && " (host)"}</td>
+                <td>{s.IsHost ? "" : s.ExternalRef ? `${churchRecords[s.ExternalRef] ?? ""} (${s.ExternalRef})` : <span class="muted">Not connected</span>}</td>
+                <td>{s.Spot}</td>
+                <td>{s.ItemsAtEvent}</td>
+                <td>{s.Orders}</td>
+                <td>{money(s.Sales, true)}</td>
+                <td>{money(s.Share, true)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <Source request="GET /api/partner/v1/events/{id}/sellers" needs="a partner key" />
+      <p class="muted">
+        "In your records" appears for {site.sellerLabel.many} who connected their account through your
+        members' area, using the ID your site passed in.
+      </p>
+    </section>
+
+    <section class="month">
+      <h2>Orders</h2>
+      <p><a class="button button-quiet" href="/demo/reports/sales.csv" download>Download as a spreadsheet</a></p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Order</th><th>Seller</th><th>Items</th><th>Amount</th><th>Status</th><th>Share</th><th>Share status</th></tr>
+          </thead>
+          <tbody>
+            {reportSales.map((s) => (
+              <tr>
+                <td>{s.OrderNumber}</td>
+                <td>@{s.Seller}</td>
+                <td>{s.Items}</td>
+                <td>{money(s.Sales, true)}</td>
+                <td>{statusLabel[s.Status]}</td>
+                <td>{s.ShareStatus === "void" ? "" : money(s.Share, true)}</td>
+                <td>{shareLabel[s.ShareStatus]}{s.SharePaidOn && `, ${shortDate(s.SharePaidOn)}`}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <Source request="GET /api/partner/v1/events/{id}/sales" needs="a partner key" />
+      <p class="muted">Buyers are never identified. Each order is listed by its number.</p>
+    </section>
+  </div>
+</Base>

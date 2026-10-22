@@ -101,3 +101,29 @@ h1, h2, h3 { line-height: 1.2; }
 
 .prose { max-width: 44rem; padding-top: 2rem; padding-bottom: 2rem; }
 .prose blockquote { margin: 1rem 0; padding: 0.5rem 1rem; border-left: 3px solid var(--color-accent); background: var(--color-surface); }
+
+.muted { color: var(--color-muted); }
+
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--color-border); white-space: nowrap; }
+th { color: var(--color-muted); font-weight: 600; }
+
+pre { overflow-x: auto; background: var(--color-surface); padding: 1rem; border-radius: var(--radius); font-size: 0.85rem; }
+
+.totals-inline { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; margin: 1rem 0; }
+.totals-inline dt { color: var(--color-muted); font-size: 0.9rem; }
+.totals-inline dd { margin: 0; font-size: 1.4rem; font-weight: 700; }
+
+.source { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; margin: 0.5rem 0 0; font-size: 0.85rem; color: var(--color-muted); }
+.source code { font-size: 0.85rem; }
+
+.demo-grid { list-style: none; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.demo-card { border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1.25rem; }
+.demo-card h2 { font-size: 1.2rem; margin: 0 0 0.5rem; }
+.demo-uses { color: var(--color-muted); font-size: 0.9rem; }
+
+.signin-box { background: var(--color-surface); border-radius: var(--radius); padding: 1.5rem; max-width: 30rem; }
+.signin-box p { color: var(--color-muted); margin-bottom: 0; }
+.signed-in { color: var(--color-muted); font-size: 0.9rem; }
+.from-org { border-left: 3px solid var(--color-accent); background: var(--color-surface); padding: 0.5rem 1rem; border-radius: 0 var(--radius) var(--radius) 0; max-width: 44rem; }

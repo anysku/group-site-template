@@ -1,0 +1,63 @@
+---
+import Base from "../../layouts/Base.astro";
+import { demoOnly } from "../../lib/demo";
+import { site } from "../../lib/site";
+
+export const getStaticPaths = demoOnly;
+
+const org = site.organizationLabel;
+
+const parts = [
+  {
+    title: "A members' area",
+    href: "/demo/members/",
+    text: `Members sign in with their anySKU account and see their own sales at your sales, next to anything your ${org.one} adds from its own records, such as a thank-you note or a year-end letter.`,
+    uses: "Sign in with anySKU",
+  },
+  {
+    title: `Reports for your ${org.many}`,
+    href: "/demo/reports/",
+    text: `Every order, every seller's totals and your ${org.many}' share, matched to the people in your own records. Build the report your leaders want, or download it as a spreadsheet.`,
+    uses: "A partner key",
+  },
+  {
+    title: "Live updates",
+    href: "/demo/live-updates/",
+    text: "anySKU tells your site within a minute when someone joins a sale, an order is collected or a share is paid, so your own systems stay in step.",
+    uses: "Webhooks",
+  },
+];
+---
+<Base title="For your web team" description="What your website can do with anySKU beyond the public pages.">
+  <div class="wrap section">
+    <h1>For your web team</h1>
+    <p class="lead">
+      The rest of this site uses anySKU's public data: the sales, the {org.many} and the totals. These three
+      need a key or a sign-in, so they run on your site's server. Here they're shown with sample data.
+    </p>
+
+    <ul class="demo-grid">
+      {parts.map((part) => (
+        <li class="demo-card">
+          <h2><a href={part.href}>{part.title}</a></h2>
+          <p>{part.text}</p>
+          <p class="demo-uses">Uses: {part.uses}</p>
+        </li>
+      ))}
+    </ul>
+
+    <section class="month prose">
+      <h2>Setting them up</h2>
+      <ol>
+        <li>A group administrator accepts the Partner Agreement on the group's manage page on anySKU, which turns on website access.</li>
+        <li>For reports and live updates, create a key and add your site's webhook address on the same page. Keep the key on your server only.</li>
+        <li>For the members' area, register your site as an app (Apps, on the manage page). Until anySKU approves it, only your group's own administrators and {org.many} can sign in, which is enough to build and test it.</li>
+      </ol>
+      <p>
+        Full details: <a href="https://www.anysku.com/developers/groups">anySKU for groups</a>. This template's
+        <a href="https://github.com/anysku/group-site-template/blob/main/AGENTS.md">AGENTS.md</a> has the same
+        information for an AI assistant.
+      </p>
+    </section>
+  </div>
+</Base>

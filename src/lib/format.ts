@@ -36,10 +36,20 @@ export function eventPlace(event: GroupEvent): string {
   return [event.City, event.State].filter(Boolean).join(", ");
 }
 
+const dateFormat = new Intl.DateTimeFormat("en-US", {
+  timeZone: site.timeZone, month: "short", day: "numeric", year: "numeric",
+});
+
+export function shortDate(value: string | null): string {
+  return value ? dateFormat.format(parseUtc(value)) : "";
+}
+
 export function capitalize(text: string): string {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
-export function money(amount: number): string {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(amount);
+export function money(amount: number, cents = false): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency", currency: "USD", minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: cents ? 2 : 0,
+  }).format(amount);
 }

@@ -1,0 +1,70 @@
+---
+import Base from "../../../../layouts/Base.astro";
+import Source from "../../../../components/Source.astro";
+import { demoOnly } from "../../../../lib/demo";
+import { site } from "../../../../lib/site";
+import { capitalize, money, shortDate } from "../../../../lib/format";
+import { churchRecords, memberLink, memberSales } from "../../../../sample/partner";
+
+export const getStaticPaths = demoOnly;
+
+const name = churchRecords[memberLink.ExternalRef] ?? `@${memberLink.Username}`;
+const collected = memberSales.filter((s) => s.Status === "collected");
+const total = collected.reduce((sum, s) => sum + s.Sales, 0);
+const shared = collected.reduce((sum, s) => sum + s.Share, 0);
+const org = site.organizationLabel;
+---
+<Base title="Your activity" description="Your sales at our sales.">
+  <div class="wrap section">
+    <p class="signed-in">Signed in as @{memberLink.Username} · <a href="/demo/members/">Sign out</a></p>
+    <h1>Hello, {name.split(" ")[0]}</h1>
+
+    <section class="month">
+      <h2>Your sales</h2>
+      <dl class="totals-inline">
+        <div><dt>Sold</dt><dd>{money(total, true)}</dd></div>
+        <div><dt>Orders collected</dt><dd>{collected.length}</dd></div>
+        <div><dt>Share to your {org.one}</dt><dd>{money(shared, true)}</dd></div>
+      </dl>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Sale</th><th>Date</th><th>Order</th><th>Items</th><th>Amount</th><th>{capitalize(org.one)}'s share</th></tr>
+          </thead>
+          <tbody>
+            {memberSales.map((s) => (
+              <tr>
+                <td>{s.EventName}</td>
+                <td>{shortDate(s.EventStartsOn)}</td>
+                <td>{s.OrderNumber}</td>
+                <td>{s.Items}</td>
+                <td>{money(s.Sales, true)}</td>
+                <td>{money(s.Share, true)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <Source request="GET /api/partner/v1/member/sales" needs="the member to sign in with anySKU" />
+    </section>
+
+    <section class="month">
+      <h2>Items you transferred</h2>
+      <p>
+        Items you passed to your {org.one} to sell, with when they were accepted and what they sold for.
+        Coming soon to anySKU's data for groups.
+      </p>
+    </section>
+
+    <section class="month">
+      <h2>From Hope Church (demo)</h2>
+      <div class="from-org">
+        <p>
+          This part comes from your {org.one}, not from anySKU. It might be a thank-you, a summary
+          from the {org.one}'s own records, or a letter for the year. Your site looks it up using the member's ID in
+          your records ({memberLink.ExternalRef} here).
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>

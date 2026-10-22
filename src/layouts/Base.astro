@@ -18,6 +18,7 @@ const nav = [
   { href: "/about/", label: "About" },
   { href: "/faq/", label: "Questions" },
   { href: "/contact/", label: "Contact" },
+  ...(sampleMode ? [{ href: "/demo/", label: "For your web team" }] : []),
 ];
 
 const social = Object.entries(site.social).filter(([, url]) => url);

@@ -1,0 +1,48 @@
+---
+import Base from "../../../layouts/Base.astro";
+import { demoOnly } from "../../../lib/demo";
+import { sampleNotice, webhookTypes } from "../../../sample/partner";
+
+export const getStaticPaths = demoOnly;
+---
+<Base title="Live updates" description="How anySKU tells your site when something changes.">
+  <div class="wrap section">
+    <h1>Live updates</h1>
+    <p class="lead">
+      Add your site's address on anySKU and choose what to hear about. Within about a minute of a change,
+      anySKU sends your site a short notice, and your site decides what to do with it.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Notice</th><th>Sent when</th><th>What your site might do</th></tr>
+        </thead>
+        <tbody>
+          {webhookTypes.map((w) => (
+            <tr>
+              <td><code>{w.type}</code></td>
+              <td>{w.when}</td>
+              <td>{w.idea}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <section class="month prose">
+      <h2>What a notice looks like</h2>
+      <pre><code>{JSON.stringify(sampleNotice, null, 2)}</code></pre>
+      <p>
+        A notice only says what changed and where. It never carries names, amounts or buyer details: your site
+        looks those up with its key, so a notice that went astray reveals nothing.
+      </p>
+      <ul>
+        <li>Each notice is signed. Check the <code>AnySku-Signature</code> header before trusting it.</li>
+        <li>Reply with any 2xx status. anySKU retries for about two days if your site is down, with the same <code>id</code>, so you can skip one you've already handled.</li>
+        <li>Use <strong>Send test</strong> on the manage page to try your address.</li>
+      </ul>
+      <p>Details and a signature example: <a href="https://www.anysku.com/developers/groups">anySKU for groups</a>.</p>
+    </section>
+  </div>
+</Base>
