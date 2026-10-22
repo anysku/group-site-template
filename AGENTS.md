@@ -42,7 +42,7 @@ Public responses are cached by anySKU for about five minutes. The limit is 120 r
 
 ### Partner API (needs a key, server side only)
 
-For the group's own reports: every sale's orders, each seller's totals and the organizations' share, including unlisted sales.
+For the group's own reports: every sale's orders, each seller's totals, the organizations' share and the items sellers transferred to an organization (`events/{id}/transfers`), including unlisted sales.
 
 - Base: `https://app-api.anysku.com/api/partner/v1/`. Header: `Authorization: Bearer ask_live_...`.
 - Keys are created by a group administrator on the group's manage page, after accepting the Partner Agreement there.
@@ -56,7 +56,7 @@ For a members' area where people see their own activity at the group's sales nex
 - Standard OAuth 2 authorization code flow with PKCE (S256), confidential client. Authorize at `https://www.anysku.com/oauth/authorize`, exchange the code at `https://www.anysku.com/oauth/token` from the server. Discovery: `https://www.anysku.com/.well-known/openid-configuration`.
 - Scope `reports:read offline_access`. Access tokens last one hour, refresh tokens 30 days and renew on use. A refresh that fails with `invalid_grant` means the person disconnected: delete what you hold for them.
 - Optional `external_ref` on the authorize request (up to 100 characters): the group's own ID for the person. It comes back with their data and on the group's seller reports.
-- With the token: `GET /api/partner/v1/member` (username, external ref, connected on) and `GET /api/partner/v1/member/sales` (their sales at the group's events).
+- With the token: `GET /api/partner/v1/member` (username, external ref, connected on), `GET /api/partner/v1/member/sales` (their sales at the group's events) and `GET /api/partner/v1/member/transfers` (items they transferred to an organization at the group's events, when it accepted them, and what each sold for). Transferred items never appear in `member/sales`, because the organization is the seller.
 - The group registers its app on the group's manage page (Apps). Until anySKU approves it, only the group's own administrators and member organizations can connect, which is enough to build and test.
 
 A members' area needs a server: an Astro server endpoint with an adapter for the host, or a separate function. Keep the client secret and tokens on the server, in an encrypted, http-only session cookie or a database.

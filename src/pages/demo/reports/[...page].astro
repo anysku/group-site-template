@@ -4,7 +4,7 @@ import Source from "../../../components/Source.astro";
 import { demoOnly } from "../../../lib/demo";
 import { site } from "../../../lib/site";
 import { capitalize, money, shortDate } from "../../../lib/format";
-import { churchRecords, reportEvent, reportSales, reportSellers, reportSummary } from "../../../sample/partner";
+import { churchRecords, reportEvent, reportSales, reportSellers, reportSummary, reportTransfers } from "../../../sample/partner";
 
 export const getStaticPaths = demoOnly;
 
@@ -96,6 +96,30 @@ const shareLabel: Record<string, string> = {
       </div>
       <Source request="GET /api/partner/v1/events/{id}/sales" needs="a partner key" />
       <p class="muted">Buyers are never identified. Each order is listed by its number.</p>
+    </section>
+
+    <section class="month">
+      <h2>Transferred items</h2>
+      <p>Items {site.sellerLabel.many} passed to the {org.one} to sell as its own.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Item</th><th>From</th><th>In your records</th><th>Accepted</th><th>Sold for</th></tr>
+          </thead>
+          <tbody>
+            {reportTransfers.map((t) => (
+              <tr>
+                <td>{t.Item}</td>
+                <td>@{t.Member}</td>
+                <td>{t.ExternalRef ? `${churchRecords[t.ExternalRef] ?? ""} (${t.ExternalRef})` : <span class="muted">Not connected</span>}</td>
+                <td>{shortDate(t.AcceptedOn)}</td>
+                <td>{t.QuantitySold > 0 ? money(t.AmountSold, true) : <span class="muted">Not sold yet</span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <Source request="GET /api/partner/v1/events/{id}/transfers" needs="a partner key" />
     </section>
   </div>
 </Base>

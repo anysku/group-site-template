@@ -4,7 +4,7 @@ import Source from "../../../../components/Source.astro";
 import { demoOnly } from "../../../../lib/demo";
 import { site } from "../../../../lib/site";
 import { capitalize, money, shortDate } from "../../../../lib/format";
-import { churchRecords, memberLink, memberSales } from "../../../../sample/partner";
+import { churchRecords, memberLink, memberSales, memberTransfers } from "../../../../sample/partner";
 
 export const getStaticPaths = demoOnly;
 
@@ -50,10 +50,25 @@ const org = site.organizationLabel;
 
     <section class="month">
       <h2>Items you transferred</h2>
-      <p>
-        Items you passed to your {org.one} to sell, with when they were accepted and what they sold for.
-        Coming soon to anySKU's data for groups.
-      </p>
+      <p>Items you passed to your {org.one} to sell, when it accepted them, and what they sold for.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Item</th><th>Sale</th><th>Accepted</th><th>Sold for</th></tr>
+          </thead>
+          <tbody>
+            {memberTransfers.map((t) => (
+              <tr>
+                <td>{t.Item}</td>
+                <td>{t.EventName}</td>
+                <td>{shortDate(t.AcceptedOn)}</td>
+                <td>{t.QuantitySold > 0 ? money(t.AmountSold, true) : <span class="muted">Not sold yet</span>}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <Source request="GET /api/partner/v1/member/transfers" needs="the member to sign in with anySKU" />
     </section>
 
     <section class="month">

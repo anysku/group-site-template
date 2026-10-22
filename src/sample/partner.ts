@@ -130,6 +130,59 @@ export const memberSales: PartnerMemberSale[] = [
   { ...sale("2609-K3D7S5", "samdemo", 1, 30, 40, "collected", "paid"), EventId: "d4", EventName: "Back to School Swap", EventStartsOn: utc(-40, 13) },
 ];
 
+export interface PartnerTransfer {
+  TransferId: string;
+  EventId: string;
+  EventName: string;
+  EventStartsOn: string | null;
+  Member: string;
+  ExternalRef: string | null;
+  Organization: string;
+  Item: string;
+  Status: "accepted" | "returned";
+  HeldBy: "member" | "organization";
+  RequestedOn: string;
+  AcceptedOn: string | null;
+  ReturnedOn: string | null;
+  QuantitySold: number;
+  AmountSold: number;
+  Sales: { OrderNumber: string; OrderedOn: string; Quantity: number; Amount: number; Status: PartnerSale["Status"]; CollectedOn: string | null }[];
+}
+
+function transfer(id: string, member: string, ref: string | null, item: string, daysAgo: number,
+  sold: { order: string; amount: number } | null): PartnerTransfer {
+  return {
+    TransferId: id,
+    EventId: "d5",
+    EventName: "Summer Yard Sale",
+    EventStartsOn: utc(-75, 13),
+    Member: member,
+    ExternalRef: ref,
+    Organization: "hopechurchdemo",
+    Item: item,
+    Status: "accepted",
+    HeldBy: "member",
+    RequestedOn: utc(-daysAgo - 2),
+    AcceptedOn: utc(-daysAgo),
+    ReturnedOn: null,
+    QuantitySold: sold ? 1 : 0,
+    AmountSold: sold?.amount ?? 0,
+    Sales: sold
+      ? [{ OrderNumber: sold.order, OrderedOn: utc(-daysAgo + 4), Quantity: 1, Amount: sold.amount, Status: "collected", CollectedOn: utc(-75) }]
+      : [],
+  };
+}
+
+export const reportTransfers: PartnerTransfer[] = [
+  transfer("t1", "samdemo", "HC-0142", "Oak bookshelf", 85, { order: "2608-J2T9W4", amount: 60 }),
+  transfer("t2", "samdemo", "HC-0142", "Box of children's books", 84, null),
+  transfer("t3", "rileydemo", "HC-0213", "Sewing machine", 82, { order: "2608-K8M3Q7", amount: 75 }),
+];
+
+export const memberTransfers = reportTransfers
+  .filter((t) => t.Member === "samdemo")
+  .map((t) => ({ ...t, ExternalRef: null }));
+
 // Members of the church's own records that the reports match against by ExternalRef.
 export const churchRecords: Record<string, string> = {
   "HC-0142": "Sam Demo",
