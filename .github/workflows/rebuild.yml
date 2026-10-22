@@ -1,0 +1,21 @@
+name: Rebuild
+
+# The site reads sales from anySKU when it builds, so rebuild it regularly to pick up new ones.
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger a deploy
+        env:
+          DEPLOY_HOOK_URL: ${{ secrets.DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$DEPLOY_HOOK_URL" ]; then
+            echo "Add a DEPLOY_HOOK_URL secret (from your host's build settings) to enable scheduled rebuilds."
+            exit 0
+          fi
+          curl -fsS -X POST "$DEPLOY_HOOK_URL"

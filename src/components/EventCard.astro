@@ -1,0 +1,35 @@
+---
+import type { GroupEvent } from "../lib/anysku";
+import { eventPlace, eventWhen } from "../lib/format";
+
+interface Props {
+  event: GroupEvent;
+  showHost?: boolean;
+}
+
+const { event, showHost = true } = Astro.props;
+const place = eventPlace(event);
+---
+<article class="event-card">
+  {event.BannerUrl && <img src={event.BannerUrl} alt="" loading="lazy" width="1500" height="500" />}
+  <div class="event-body">
+    {event.Status === "live" && <p class="badge">Happening now</p>}
+    <h3><a href={event.Url}>{event.Name}</a></h3>
+    <p class="event-when">{eventWhen(event)}</p>
+    {place && <p class="event-place">{place}</p>}
+    {showHost && (
+      <p class="event-host">Hosted by <a href={`/organizations/${event.HostUsername}/`}>@{event.HostUsername}</a></p>
+    )}
+    {event.Status !== "ended" && (
+      <p class="event-counts">
+        {event.ItemsForSale} {event.ItemsForSale === 1 ? "item" : "items"} from {event.Sellers} {event.Sellers === 1 ? "seller" : "sellers"}
+      </p>
+    )}
+    {event.Status !== "ended" && (
+      <p class="event-links">
+        <a class="button" href={event.Url}>See the items</a>
+        <a href={event.FlyerUrl}>Printable flyer</a>
+      </p>
+    )}
+  </div>
+</article>

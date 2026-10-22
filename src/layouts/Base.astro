@@ -1,0 +1,71 @@
+---
+import "../styles/global.css";
+import { site } from "../../site.config";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = site.description } = Astro.props;
+const pageTitle = title ? `${title} | ${site.name}` : site.name;
+
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/events/", label: "Sales" },
+  { href: "/organizations/", label: site.organizationLabel.many[0].toUpperCase() + site.organizationLabel.many.slice(1) },
+  { href: "/about/", label: "About" },
+  { href: "/faq/", label: "Questions" },
+  { href: "/contact/", label: "Contact" },
+];
+
+const social = Object.entries(site.social).filter(([, url]) => url);
+const path = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {Astro.site && <link rel="canonical" href={new URL(path, Astro.site)} />}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap header-row">
+        <a class="brand" href="/">{site.name}</a>
+        <nav aria-label="Main">
+          <ul>
+            {nav.map((item) => (
+              <li>
+                <a href={item.href} aria-current={path === item.href ? "page" : undefined}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-row">
+        <p>&copy; {new Date().getFullYear()} {site.name}. Sales take place on <a href="https://www.anysku.com">anySKU</a>.</p>
+        <ul class="footer-links">
+          <li><a href="/branding/">Branding</a></li>
+          <li><a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></li>
+          {social.map(([name, url]) => (
+            <li><a href={url} rel="me">{name[0].toUpperCase() + name.slice(1)}</a></li>
+          ))}
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>

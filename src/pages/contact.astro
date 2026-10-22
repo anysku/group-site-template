@@ -1,0 +1,11 @@
+---
+import Base from "../layouts/Base.astro";
+import { anysku, site } from "../../site.config";
+---
+<Base title="Contact" description="How to reach us.">
+  <article class="wrap prose">
+    <h1>Contact</h1>
+    <p>Email us at <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>.</p>
+    <p>For help with your anySKU account, orders or payouts, contact <a href={`${anysku.siteUrl}/contact`}>anySKU support</a>.</p>
+  </article>
+</Base>

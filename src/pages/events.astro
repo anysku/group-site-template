@@ -1,0 +1,41 @@
+---
+import Base from "../layouts/Base.astro";
+import EventCard from "../components/EventCard.astro";
+import { getEvents } from "../lib/anysku";
+import { eventMonth } from "../lib/format";
+
+const [current, ended] = await Promise.all([getEvents("current"), getEvents("ended")]);
+
+const months = new Map<string, typeof current>();
+for (const event of current) {
+  const key = eventMonth(event);
+  months.set(key, [...(months.get(key) ?? []), event]);
+}
+const recent = ended.slice(0, 6);
+---
+<Base title="Sales" description="Every upcoming sale, with the items you can order ahead.">
+  <div class="wrap section">
+    <h1>Sales</h1>
+    <p class="lead">Order ahead online, then collect on the day.</p>
+
+    {months.size === 0 && <p>No sales are scheduled right now. Check back soon.</p>}
+
+    {[...months].map(([month, events]) => (
+      <section class="month">
+        <h2>{month}</h2>
+        <div class="event-grid">
+          {events.map((event) => <EventCard event={event} />)}
+        </div>
+      </section>
+    ))}
+
+    {recent.length > 0 && (
+      <section class="month">
+        <h2>Recent sales</h2>
+        <div class="event-grid">
+          {recent.map((event) => <EventCard event={event} />)}
+        </div>
+      </section>
+    )}
+  </div>
+</Base>

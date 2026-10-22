@@ -1,0 +1,56 @@
+---
+import { render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import EventCard from "../../components/EventCard.astro";
+import { anysku } from "../../../site.config";
+import { loadOrganizations, type Organization } from "../../lib/organizations";
+
+export async function getStaticPaths() {
+  const organizations = await loadOrganizations();
+  return organizations.map((org) => ({ params: { username: org.username }, props: { org } }));
+}
+
+const { org } = Astro.props as { org: Organization };
+const Content = org.page ? (await render(org.page)).Content : null;
+const upcoming = org.events.filter((e) => e.Status !== "ended");
+const past = org.events.filter((e) => e.Status === "ended").slice(0, 6);
+const photo = org.page?.data.photo ?? org.seller?.AvatarUrl;
+const profileUrl = org.seller?.Url ?? `${anysku.siteUrl}/@${org.username}`;
+---
+<Base title={org.name} description={org.seller?.Bio ?? undefined}>
+  <div class="wrap section">
+    <header class="org-header">
+      {photo && <img src={photo} alt="" width="120" height="120" />}
+      <div>
+        <h1>{org.name}</h1>
+        {org.seller?.Location && <p>{org.seller.Location}</p>}
+        <p>
+          <a href={profileUrl}>On anySKU</a>
+          {org.page?.data.website && <> · <a href={org.page.data.website}>Website</a></>}
+        </p>
+      </div>
+    </header>
+
+    {Content ? <div class="prose"><Content /></div> : org.seller?.Bio && <p class="lead">{org.seller.Bio}</p>}
+
+    <section class="month">
+      <h2>Upcoming sales</h2>
+      {upcoming.length > 0 ? (
+        <div class="event-grid">
+          {upcoming.map((event) => <EventCard event={event} showHost={false} />)}
+        </div>
+      ) : (
+        <p>Nothing scheduled yet.</p>
+      )}
+    </section>
+
+    {past.length > 0 && (
+      <section class="month">
+        <h2>Past sales</h2>
+        <div class="event-grid">
+          {past.map((event) => <EventCard event={event} showHost={false} />)}
+        </div>
+      </section>
+    )}
+  </div>
+</Base>

@@ -1,0 +1,36 @@
+---
+import Base from "../../layouts/Base.astro";
+import { site } from "../../../site.config";
+import { loadOrganizations } from "../../lib/organizations";
+
+const organizations = await loadOrganizations();
+const label = site.organizationLabel.many;
+const title = label[0].toUpperCase() + label.slice(1);
+---
+<Base title={title} description={`The ${label} running sales with ${site.name}.`}>
+  <div class="wrap section">
+    <h1>{title}</h1>
+    <p class="lead">The {label} running sales with {site.name}.</p>
+
+    {organizations.length === 0 ? (
+      <p>Our first {label} are getting ready. Check back soon.</p>
+    ) : (
+      <ul class="org-grid">
+        {organizations.map((org) => {
+          const photo = org.page?.data.photo ?? org.seller?.AvatarUrl;
+          const next = org.events.find((e) => e.Status !== "ended");
+          return (
+            <li class="org-card">
+              {photo && <img src={photo} alt="" loading="lazy" width="96" height="96" />}
+              <div>
+                <h2><a href={`/organizations/${org.username}/`}>{org.name}</a></h2>
+                {org.seller?.Location && <p>{org.seller.Location}</p>}
+                {next && <p>Next sale: <a href={next.Url}>{next.Name}</a></p>}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    )}
+  </div>
+</Base>

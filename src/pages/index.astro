@@ -1,0 +1,81 @@
+---
+import Base from "../layouts/Base.astro";
+import EventCard from "../components/EventCard.astro";
+import Steps from "../components/Steps.astro";
+import { anysku, site } from "../../site.config";
+import { getEvents, getGroup, getStats } from "../lib/anysku";
+import { money } from "../lib/format";
+
+const [group, events, stats] = await Promise.all([getGroup(), getEvents("current"), getStats()]);
+const next = events.slice(0, 3);
+const org = site.organizationLabel;
+
+const steps = [
+  {
+    title: "See how it works",
+    text: `Your ${org.one} holds a sale. Members sell their own things, neighbours order ahead, and everyone meets on the day.`,
+    link: { href: "/about/", label: "About us" },
+  },
+  {
+    title: "Create your free anySKU account",
+    text: "One account to sell, buy and get paid. It takes a minute with your email or phone number.",
+    link: { href: `${anysku.siteUrl}/auth`, label: "Sign up on anySKU" },
+  },
+  {
+    title: `Join your ${org.one}'s sale`,
+    text: `Open the invite link your ${org.one} sends you, choose what to sell, and bring it on the day.`,
+    link: { href: "/events/", label: "Find a sale" },
+  },
+];
+---
+<Base>
+  <section class="hero">
+    <div class="wrap">
+      {group.LogoUrl && <img class="hero-logo" src={group.LogoUrl} alt="" width="120" height="80" />}
+      <h1>{site.name}</h1>
+      <p class="lead">{site.tagline}</p>
+      <p class="hero-actions">
+        <a class="button" href={`${anysku.siteUrl}/auth`}>Get started</a>
+        <a class="button button-quiet" href="/events/">Find a sale</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <h2>Three steps to your first sale</h2>
+    <Steps steps={steps} />
+  </section>
+
+  {site.overviewVideoUrl && (
+    <section class="wrap section">
+      <h2>How a sale works</h2>
+      <video class="video" controls preload="metadata" playsinline src={site.overviewVideoUrl}></video>
+    </section>
+  )}
+
+  <section class="wrap section">
+    <h2>Coming up</h2>
+    {next.length > 0 ? (
+      <div class="event-grid">
+        {next.map((event) => <EventCard event={event} />)}
+      </div>
+    ) : (
+      <p>No sales are scheduled right now. Check back soon.</p>
+    )}
+    <p><a href="/events/">All sales</a></p>
+  </section>
+
+  {stats.TotalsShown && stats.Sales !== null && (
+    <section class="wrap section totals">
+      <h2>So far</h2>
+      <dl>
+        <div><dt>Sales held</dt><dd>{stats.EventsCounted}</dd></div>
+        <div><dt>Sellers</dt><dd>{stats.Sellers}</dd></div>
+        <div><dt>Sold</dt><dd>{money(stats.Sales)}</dd></div>
+        {stats.OrganizationsShare !== null && (
+          <div><dt>Earned by our {org.many}</dt><dd>{money(stats.OrganizationsShare)}</dd></div>
+        )}
+      </dl>
+    </section>
+  )}
+</Base>
