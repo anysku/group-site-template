@@ -84,6 +84,7 @@ h1, h2, h3 { line-height: 1.2; }
 .event-when { font-weight: 600; }
 .event-place, .event-host, .event-counts { color: var(--color-muted); }
 .event-links { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 0.75rem !important; }
+.event-sell-note { color: var(--color-muted); font-size: 0.9rem; margin-top: 0.75rem !important; }
 .badge { display: inline-block; font-size: 0.8rem; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 999px; background: var(--color-accent); color: var(--color-accent-text); }
 
 .org-grid { list-style: none; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); }

@@ -32,5 +32,11 @@ const place = eventPlace(event);
         <a href={event.FlyerUrl}>Printable flyer</a>
       </p>
     )}
+    {event.Status !== "ended" && (
+      <p class="event-sell-note">
+        Want to sell at this sale? Your {site.organizationLabel.one} shares a seller invite: look for the
+        poster at your {site.organizationLabel.one} or in its newsletter.
+      </p>
+    )}
   </div>
 </article>

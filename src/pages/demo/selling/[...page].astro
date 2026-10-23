@@ -1,0 +1,54 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Source from "../../../components/Source.astro";
+import { demoOnly } from "../../../lib/demo";
+import { site } from "../../../lib/site";
+import { sampleLinks } from "../../../sample/partner";
+
+export const getStaticPaths = demoOnly;
+
+const org = site.organizationLabel;
+---
+<Base title="Sell at a sale" description="How members get the seller invite for their sale.">
+  <div class="wrap section">
+    <h1>Sell at a sale</h1>
+    <p class="lead">
+      Members join a sale from their {org.one}'s seller invite. Whoever has the invite can sell at the sale,
+      so it goes to your members only: never on a public page.
+    </p>
+
+    <section class="month">
+      <h2>Where the invite comes from</h2>
+      <ul class="prose">
+        <li>
+          <strong>In anySKU, for the {org.one}:</strong> on the sale, Invite Other Sellers gives the link, a QR
+          code and a printable seller poster for the bulletin board, the announcements or an email to members.
+        </li>
+        <li>
+          <strong>For the group:</strong> the same links are on the group's manage page, under Links and flyers.
+        </li>
+        <li>
+          <strong>On your site:</strong> in the members' area, after a member signs in, as below.
+        </li>
+      </ul>
+    </section>
+
+    <section class="month">
+      <h2>In your members' area</h2>
+      <div class="demo-card">
+        <h3>Fall Rummage Sale (demo)</h3>
+        <p>Have things to sell? Join the sale, choose what to bring, and you're paid for what sells.</p>
+        <p>
+          <span class="button" aria-disabled="true">Join as a seller</span>
+          <span class="muted">Printable seller poster</span>
+        </p>
+        <p class="muted">Sample link: <code>{sampleLinks.JoinUrl}</code></p>
+      </div>
+      <Source request="GET /api/partner/v1/events/{id}/links" needs="a partner key with seller invite links (invites:read), on your server, behind your login" />
+      <p class="muted">
+        The {org.one} can replace its invite at any time; the old link and every printed poster then stop working.
+        Fetch it each time rather than saving a copy.
+      </p>
+    </section>
+  </div>
+</Base>

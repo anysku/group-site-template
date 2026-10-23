@@ -183,6 +183,18 @@ export const memberTransfers = reportTransfers
   .filter((t) => t.Member === "samdemo")
   .map((t) => ({ ...t, ExternalRef: null }));
 
+// GET /api/partner/v1/events/{id}/links with invites:read. JoinUrl and SellerPosterUrl appear only for a key
+// with that permission, and only while the sale is open to sellers.
+export const sampleLinks = {
+  EventId: "d1",
+  EventUrl: "https://www.anysku.com/@hopechurchdemo/event/fall-rummage-sale-demo",
+  FlyerUrl: "https://www.anysku.com/@hopechurchdemo/event/fall-rummage-sale-demo/print",
+  AcceptingSellers: true,
+  JoinUrl: "https://www.anysku.com/@hopechurchdemo/event/fall-rummage-sale-demo/sell-at/EXAMPLE",
+  SellerPosterUrl: "https://www.anysku.com/@hopechurchdemo/event/fall-rummage-sale-demo/sell-at/EXAMPLE/print",
+  QrUrl: "https://app-api.anysku.com/api/partner/v1/events/d1/qr?target=join",
+};
+
 // Members of the church's own records that the reports match against by ExternalRef.
 export const churchRecords: Record<string, string> = {
   "HC-0142": "Sam Demo",

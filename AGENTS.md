@@ -14,6 +14,17 @@ They exist on anySKU. Link to them instead.
 - A sales dashboard for the group: group administrators use `https://www.anysku.com/g/{groupSlug}/manage`. Build custom reports only from the partner API below.
 - Copies of anySKU's screens or branding. The site should look like the group, not like anySKU.
 
+## Seller invites
+
+Members join a sale from its seller invite link (`JoinUrl`, with `SellerPosterUrl` and a QR). Whoever has
+the link can sell at the sale, so it is for the group's own members:
+
+- Never put it on a public page, in the repository or in a public build.
+- To show it on the site, fetch `GET /api/partner/v1/events/{id}/links` from the server with a key that has
+  seller invite links (`invites:read`), and only show it to signed-in members.
+- Fetch it each time. The host can replace the invite, which stops the old link and every printed poster.
+- Public pages may say that members get the invite from their organization (the template's sale cards do).
+
 ## Wording
 
 How the group describes money with its members (gifts, donations, receipts, tax letters) is the group's own decision, under its own advice. The one rule comes from anySKU's Partner Agreement, section 4.2: never say or imply that anySKU issues receipts, takes a tax position, is a charity or collects money for a cause, and don't put anySKU's name or logo on receipts, tax letters or fundraising material. Saying sales take place "on anySKU" with a link is fine; other uses of the name or logo need anySKU's written permission.
