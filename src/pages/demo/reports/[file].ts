@@ -1,9 +1,9 @@
 import type { APIRoute } from "astro";
-import { sampleMode } from "../../../lib/site";
+import { demoMode } from "../../../lib/site";
 import { reportEvent, reportSales } from "../../../sample/partner";
 
 export function getStaticPaths() {
-  return sampleMode ? [{ params: { file: "sales.csv" } }] : [];
+  return demoMode ? [{ params: { file: "sales.csv" } }] : [];
 }
 
 const columns = ["OrderNumber", "OrderedOn", "Seller", "Items", "Sales", "ShareRate", "Share", "Status", "ShareStatus", "CollectedOn", "SharePaidOn"] as const;

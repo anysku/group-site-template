@@ -4,7 +4,7 @@ A starter website for a group whose member organizations run sales on [anySKU](h
 
 anySKU handles the selling: accounts, listings, payments, pickup and sales reports. This site doesn't repeat any of that. It tells people who you are and sends them to the right place on anySKU.
 
-See it running with sample sales: https://groups-demo.anysku.com
+See it running: https://groups-demo.anysku.com (an example group on anySKU, whose sales are examples too)
 
 ## What's included
 
@@ -44,7 +44,7 @@ npm run dev
 
 Then open http://localhost:4321. Changes show as you save.
 
-To try it with the sample sales used by the demo, run `SAMPLE_DATA=1 npm run dev` (in PowerShell: `$env:SAMPLE_DATA=1; npm run dev`).
+To try it without a group of your own, run `SAMPLE_DATA=1 npm run dev` for built-in sample sales (in PowerShell: `$env:SAMPLE_DATA=1; npm run dev`), or `GROUP_SLUG=example-church-network npm run dev` for the live example group.
 
 ## Working with an AI assistant
 

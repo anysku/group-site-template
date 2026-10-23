@@ -1,6 +1,7 @@
 name: Demo site
 
-# Publishes the sample-data demo from the template repository only. Copies of the template skip this.
+# Publishes the demo from the template repository only; copies of the template skip this. Its public pages
+# read the live Example Church Network group on anySKU; the /demo/ pages use sample partner data.
 on:
   push:
     branches: [main]
@@ -30,7 +31,8 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          SAMPLE_DATA: "1"
+          DEMO_SITE: "1"
+          GROUP_SLUG: example-church-network
           SITE_URL: https://groups-demo.anysku.com
       - uses: actions/upload-pages-artifact@v3
         with:

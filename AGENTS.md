@@ -65,7 +65,7 @@ A members' area needs a server: an Astro server endpoint with an adapter for the
 
 - Astro 7, static output. `npm run dev` to work locally, `npm run build` to build into `dist/`.
 - `site.config.ts`: the group's settings. `GROUP_SLUG` and `ANYSKU_API_URL` environment variables override them for local testing.
-- `SAMPLE_DATA=1` builds with the sample responses in `src/sample/` (same shapes as the API) and shows a banner. It also builds `src/pages/demo/`, which shows the members' area, reports and live updates with sample partner data; those pages build nothing otherwise, since a real site needs a server and keys for them. The public demo uses it; `.github/workflows/demo.yml` only runs in `anysku/group-site-template`.
+- `SAMPLE_DATA=1` builds with the sample responses in `src/sample/` (same shapes as the API), offline. `DEMO_SITE=1` builds the public demo: an example banner and names, and `src/pages/demo/`, which shows the members' area, reports and live updates with sample partner data (a real site needs a server and keys for those). `SAMPLE_DATA` implies `DEMO_SITE`. The public demo (`.github/workflows/demo.yml`, only in `anysku/group-site-template`) uses `DEMO_SITE=1` with `GROUP_SLUG=example-church-network`, a live example group on anySKU.
 - `src/lib/anysku.ts`: the API calls and response types. Add new endpoints here.
 - `src/pages/`: one file per page. Markdown pages use `layouts/Page.astro`. The example text in `about.md` and `faq.md` describes a community sale (people selling their own things, the organization receiving a share); rewrite it for the group's kind of sale.
 - Use `site.organizationLabel` and `site.sellerLabel` in page text instead of hard-coding "church", "school", "member" or "vendor".

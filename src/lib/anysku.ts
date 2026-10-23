@@ -1,4 +1,4 @@
-import { anysku, sampleMode, site } from "./site";
+import { anysku, sampleData, site } from "./site";
 import { sampleResponse } from "../sample/data";
 
 export interface Group {
@@ -57,7 +57,7 @@ export const groupSlug: string = import.meta.env.GROUP_SLUG ?? site.groupSlug;
 const cache = new Map<string, Promise<unknown>>();
 
 async function get<T>(path: string, { allowMissing = false } = {}): Promise<T | null> {
-  if (sampleMode) return sampleResponse(path) as T | null;
+  if (sampleData) return sampleResponse(path) as T | null;
   const url = `${apiUrl}${path}`;
   if (!cache.has(url)) {
     cache.set(url, fetch(url, { headers: { Accept: "application/json" } }).then(async (res) => {

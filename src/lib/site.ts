@@ -1,9 +1,15 @@
 import { anysku, site as configured } from "../../site.config";
 
-// Set SAMPLE_DATA=1 to build with the sample sales in src/sample instead of your group's.
-export const sampleMode = ["1", "true"].includes(String(import.meta.env.SAMPLE_DATA ?? "").toLowerCase());
+const on = (value: unknown) => ["1", "true"].includes(String(value ?? "").toLowerCase());
 
-export const site = sampleMode
+// SAMPLE_DATA=1 builds with the sample sales in src/sample instead of asking anySKU (works offline).
+export const sampleData = on(import.meta.env.SAMPLE_DATA);
+
+// DEMO_SITE=1 builds the public demo: the example banner and names, and the /demo/ pages.
+// SAMPLE_DATA implies it.
+export const demoMode = sampleData || on(import.meta.env.DEMO_SITE);
+
+export const site = demoMode
   ? {
       ...configured,
       name: "Example Church Network",

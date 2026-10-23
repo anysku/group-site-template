@@ -1,6 +1,6 @@
-import { sampleMode } from "./site";
+import { demoMode } from "./site";
 
-// The demo pages only exist in sample mode. Each one exports this as its getStaticPaths.
+// The demo pages only exist on the demo site (DEMO_SITE or SAMPLE_DATA). Each one exports this as its getStaticPaths.
 export function demoOnly() {
-  return sampleMode ? [{ params: { page: undefined } }] : [];
+  return demoMode ? [{ params: { page: undefined } }] : [];
 }

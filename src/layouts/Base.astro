@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { sampleMode, site } from "../lib/site";
+import { demoMode, sampleData, site } from "../lib/site";
 import { capitalize } from "../lib/format";
 
 interface Props {
@@ -18,7 +18,7 @@ const nav = [
   { href: "/about/", label: "About" },
   { href: "/faq/", label: "Questions" },
   { href: "/contact/", label: "Contact" },
-  ...(sampleMode ? [{ href: "/demo/", label: "For your web team" }] : []),
+  ...(demoMode ? [{ href: "/demo/", label: "For your web team" }] : []),
 ];
 
 const social = Object.entries(site.social).filter(([, url]) => url);
@@ -38,9 +38,12 @@ const path = Astro.url.pathname;
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
-    {sampleMode && (
+    {demoMode && (
       <p class="sample-banner">
-        An example site with sample sales. <a href="https://github.com/anysku/group-site-template">Make your own</a>.
+        {sampleData
+          ? "An example site with sample sales."
+          : "An example site. Its sales come from an example group on anySKU, and their items aren't for sale."}
+        {" "}<a href="https://github.com/anysku/group-site-template">Make your own</a>.
       </p>
     )}
     <header class="site-header">
