@@ -128,3 +128,8 @@ pre { overflow-x: auto; background: var(--color-surface); padding: 1rem; border-
 .signin-box p { color: var(--color-muted); margin-bottom: 0; }
 .signed-in { color: var(--color-muted); font-size: 0.9rem; }
 .from-org { border-left: 3px solid var(--color-accent); background: var(--color-surface); padding: 0.5rem 1rem; border-radius: 0 var(--radius) var(--radius) 0; max-width: 44rem; }
+
+.printouts { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); }
+.printouts figure { margin: 0; }
+.printouts img { width: 100%; border: 1px solid var(--color-border); border-radius: var(--radius); background: #fff; }
+.printouts figcaption { margin-top: 0.5rem; }

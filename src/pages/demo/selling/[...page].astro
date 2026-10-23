@@ -18,6 +18,31 @@ const org = site.organizationLabel;
     </p>
 
     <section class="month">
+      <h2>Two printouts for every sale</h2>
+      <p>
+        anySKU makes both for each sale, as a sign and a handout, each with its own QR code. Print them, put
+        them in the bulletin, or show them on the screen during announcements.
+      </p>
+      <div class="printouts">
+        <figure>
+          <img src="/demo/seller-printouts.webp" alt="The seller poster: Sell your own things at this event, with a QR code to join" width="816" height="592" loading="lazy" />
+          <figcaption>
+            <strong>For your members: the seller poster.</strong> Its QR code opens the invite to sell at
+            the sale. <a href={sampleLinks.SellerPosterUrl}>Open the printable poster</a>
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="/demo/buyer-printouts.webp" alt="The buyer flyer: the sale's name, date and a QR code to browse and buy" width="816" height="592" loading="lazy" />
+          <figcaption>
+            <strong>For shoppers: the flyer.</strong> Its QR code opens the sale, to browse and order ahead.
+            Fine to share anywhere. <a href={sampleLinks.FlyerUrl}>Open the printable flyer</a>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="muted">The pictures show this demo's printouts; your sale's are made with your own name, dates and banner.</p>
+    </section>
+
+    <section class="month">
       <h2>Where the invite comes from</h2>
       <ul class="prose">
         <li>
@@ -38,11 +63,14 @@ const org = site.organizationLabel;
       <div class="demo-card">
         <h3>Fall Rummage Sale (demo)</h3>
         <p>Have things to sell? Join the sale, choose what to bring, and you're paid for what sells.</p>
-        <p>
-          <span class="button" aria-disabled="true">Join as a seller</span>
-          <span class="muted">Printable seller poster</span>
+        <p class="event-links">
+          <a class="button" href={sampleLinks.JoinUrl}>Join as a seller</a>
+          <a href={sampleLinks.SellerPosterUrl}>Printable seller poster</a>
         </p>
-        <p class="muted">Sample link: <code>{sampleLinks.JoinUrl}</code></p>
+        <p class="muted">
+          In this demo these open the example sale's real invite page and poster: you'll see what your members
+          see, but an example sale can't be joined.
+        </p>
       </div>
       <Source request="GET /api/partner/v1/events/{id}/links" needs="a partner key with seller invite links (invites:read), on your server, behind your login" />
       <p class="muted">

@@ -184,14 +184,15 @@ export const memberTransfers = reportTransfers
   .map((t) => ({ ...t, ExternalRef: null }));
 
 // GET /api/partner/v1/events/{id}/links with invites:read. JoinUrl and SellerPosterUrl appear only for a key
-// with that permission, and only while the sale is open to sellers.
+// with that permission, and only while the sale is open to sellers. These are the live demo sale's real
+// invite: a sample host's sale can't be joined, so it is safe to show.
 export const sampleLinks = {
   EventId: "d1",
   EventUrl: "https://www.anysku.com/@hopechurchdemo/event/fall-rummage-sale-demo",
   FlyerUrl: "https://www.anysku.com/@hopechurchdemo/event/fall-rummage-sale-demo/print",
   AcceptingSellers: true,
-  JoinUrl: "https://www.anysku.com/@hopechurchdemo/event/fall-rummage-sale-demo/sell-at/EXAMPLE",
-  SellerPosterUrl: "https://www.anysku.com/@hopechurchdemo/event/fall-rummage-sale-demo/sell-at/EXAMPLE/print",
+  JoinUrl: "https://www.anysku.com/@hopechurchdemo/event/fall-rummage-sale-demo/sell-at/9WSABADC",
+  SellerPosterUrl: "https://www.anysku.com/@hopechurchdemo/event/fall-rummage-sale-demo/sell-at/9WSABADC/print",
   QrUrl: "https://app-api.anysku.com/api/partner/v1/events/d1/qr?target=join",
 };
 
