@@ -6,7 +6,7 @@ description: Logos, wording and flyers for promoting a sale.
 
 Use these to promote your organization's sale in bulletins, newsletters and on social media.
 
-## Our logo and colours
+## Our logo and colors
 
 Add your logo files to `public/branding/` and link them here.
 

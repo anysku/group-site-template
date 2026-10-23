@@ -70,6 +70,6 @@ A members' area needs a server: an Astro server endpoint with an adapter for the
 - `src/pages/`: one file per page. Markdown pages use `layouts/Page.astro`. The example text in `about.md` and `faq.md` describes a community sale (people selling their own things, the organization receiving a share); rewrite it for the group's kind of sale.
 - Use `site.organizationLabel` and `site.sellerLabel` in page text instead of hard-coding "church", "school", "member" or "vendor".
 - `src/content/organizations/{username}.md`: optional extra text and photo for an organization.
-- `src/styles/global.css`: colours and layout. Change the variables at the top for the group's colours.
+- `src/styles/global.css`: colors and layout. Change the variables at the top for the group's colors.
 - If anySKU can't be reached the build fails, and the host keeps serving the last good version. Don't swallow those errors.
 - Keep pages readable on a phone, keep text plain, and check new pages work with the sales list empty.

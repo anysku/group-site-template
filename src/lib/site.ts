@@ -13,7 +13,7 @@ export const site = demoMode
   ? {
       ...configured,
       name: "Example Church Network",
-      tagline: "Church sales that bring neighbours together.",
+      tagline: "Church sales that bring neighbors together.",
       organizationLabel: { one: "church", many: "churches" },
     }
   : configured;

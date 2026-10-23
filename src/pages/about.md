@@ -10,7 +10,7 @@ Write your mission here: who you are, who you serve, and why your organizations 
 
 1. An organization sets up a sale on anySKU with a date and a place.
 2. Members list things they want to sell, from home, with a few photos.
-3. Neighbours browse the sale online, order ahead and pay by card. The card is only charged when they collect.
+3. Neighbors browse the sale online, order ahead and pay by card. The card is only charged when they collect.
 4. On the day, members bring their sold items and buyers collect them.
 5. Members are paid for what they sell, and the organization receives its agreed share of each sale.
 

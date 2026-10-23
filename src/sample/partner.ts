@@ -196,7 +196,7 @@ export const webhookTypes = [
   { type: "order.collected", when: "A buyer collects their order", idea: "Mark it done in your own records." },
   { type: "share.paid", when: "The organization's share of an order is paid out", idea: "Record the payment in your accounts." },
   { type: "event.started / event.ended", when: "A sale opens or finishes", idea: "Send the end-of-day summary to your leaders." },
-  { type: "order.cancelled / order.refunded", when: "An order is cancelled or refunded", idea: "Take it out of your totals." },
+  { type: "order.cancelled / order.refunded", when: "An order is canceled or refunded", idea: "Take it out of your totals." },
 ];
 
 export const sampleNotice = {
