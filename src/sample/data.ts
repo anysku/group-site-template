@@ -64,7 +64,7 @@ const stats: GroupStats = {
   EventsCounted: ended.length,
   Sellers: 24,
   Sales: 3860,
-  OrganizationsShare: 386,
+  OrganizationsShare: 1930,
 };
 
 const sellers: Record<string, Seller> = {

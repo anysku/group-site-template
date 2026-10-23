@@ -67,8 +67,8 @@ function sale(n: string, seller: string, items: number, amount: number, daysAgo:
     Seller: seller,
     Items: items,
     Sales: amount,
-    ShareRate: 0.1,
-    Share: Math.round(amount * 10) / 100,
+    ShareRate: 0.5,
+    Share: Math.round(amount * 50) / 100,
     Status: status,
     ShareStatus: shareStatus,
     CollectedOn: collected ? utc(-daysAgo) : null,
@@ -104,10 +104,10 @@ export const reportSales: PartnerSale[] = [
 
 export const reportSellers: PartnerSeller[] = [
   { Username: "hopechurchdemo", ExternalRef: null, Spot: "Main table", IsHost: true, IsActive: true, ItemsAtEvent: 6, Orders: 0, ToCollect: 0, Sales: 0, Share: 0 },
-  { Username: "samdemo", ExternalRef: "HC-0142", Spot: "Table 3", IsHost: false, IsActive: true, ItemsAtEvent: 9, Orders: 2, ToCollect: 0, Sales: 63, Share: 6.3 },
-  { Username: "jordandemo", ExternalRef: "HC-0087", Spot: "Table 5", IsHost: false, IsActive: true, ItemsAtEvent: 4, Orders: 2, ToCollect: 0, Sales: 120, Share: 12 },
-  { Username: "rileydemo", ExternalRef: "HC-0213", Spot: "Table 1", IsHost: false, IsActive: true, ItemsAtEvent: 12, Orders: 2, ToCollect: 0, Sales: 64, Share: 6.4 },
-  { Username: "caseydemo", ExternalRef: null, Spot: "Table 2", IsHost: false, IsActive: true, ItemsAtEvent: 7, Orders: 1, ToCollect: 0, Sales: 88, Share: 8.8 },
+  { Username: "samdemo", ExternalRef: "HC-0142", Spot: "Table 3", IsHost: false, IsActive: true, ItemsAtEvent: 9, Orders: 2, ToCollect: 0, Sales: 63, Share: 31.5 },
+  { Username: "jordandemo", ExternalRef: "HC-0087", Spot: "Table 5", IsHost: false, IsActive: true, ItemsAtEvent: 4, Orders: 2, ToCollect: 0, Sales: 120, Share: 60 },
+  { Username: "rileydemo", ExternalRef: "HC-0213", Spot: "Table 1", IsHost: false, IsActive: true, ItemsAtEvent: 12, Orders: 2, ToCollect: 0, Sales: 64, Share: 32 },
+  { Username: "caseydemo", ExternalRef: null, Spot: "Table 2", IsHost: false, IsActive: true, ItemsAtEvent: 7, Orders: 1, ToCollect: 0, Sales: 88, Share: 44 },
 ];
 
 export const reportSummary: PartnerSummary = {
@@ -121,7 +121,7 @@ export const reportSummary: PartnerSummary = {
   CollectedSales: 335,
   SharePending: 0,
   ShareEarned: 0,
-  SharePaid: 33.5,
+  SharePaid: 167.5,
 };
 
 export const memberSales: PartnerMemberSale[] = [
